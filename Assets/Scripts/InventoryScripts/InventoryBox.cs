@@ -15,13 +15,11 @@ public class InventoryBox : MonoBehaviour
             {
                 if (_cells[i].GetObject() == null)
                 {
-                    Debug.Log("Добавили новый!");
                     _cells[i].AddItem(_objectID[objectItem.GetComponent<Item>().GetID()]);
                     return true;
                 }
             }
 
-            Debug.Log("Нет места");
             return false;
         }
         else
@@ -38,9 +36,32 @@ public class InventoryBox : MonoBehaviour
             {
                 if (_cells[i].AddItem(objectItem))
                 {
-                    Debug.Log("Добавили к имеющимуся!");
                     return true;
                 }
+            }
+        }
+
+        return false;
+    }
+
+    public void RemoveObject(GameObject objectItem) 
+    {
+        for (int i = 0; i < _cells.Count; i++)
+        {
+            if (objectItem == _cells[i].GetObject())
+            {
+                _cells[i].RemoveItem();
+            }
+        }
+    }
+
+    public bool GetItem(GameObject objectItem)
+    {
+        for(int i = 0; i < _cells.Count; i++)
+        {
+            if(objectItem == _cells[i].GetObject())
+            {
+                return true;
             }
         }
 

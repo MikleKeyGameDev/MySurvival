@@ -5,13 +5,19 @@ public class Cell : MonoBehaviour
 {
     [SerializeField] private GameObject _objectItem;
     [SerializeField] private GameObject _buttonEat;
+    [SerializeField] private GameObject _buttonUse;
+
     [SerializeField] private int _quantity;
     [SerializeField] private int _maxQuantity;
+
     [SerializeField] private Text _textQuantity;
+
     [SerializeField] private Sprite _standartSprite;
+
     [SerializeField] private Image _imageCell;
 
-    [SerializeField] private Item _item;
+    private Item _item;
+
     private SpriteRenderer _sprite;
 
     private void Update()
@@ -21,7 +27,15 @@ public class Cell : MonoBehaviour
             if (_objectItem.GetComponent<Item>().GetQuantitative() == true && _quantity > 0) { _textQuantity.text = _quantity.ToString(); }
             else { _textQuantity.text = ""; }
 
-            if(_item != null) { _buttonEat.SetActive(_item.GetIsFood()); }
+            if(_item != null) 
+            {
+                _buttonUse.SetActive(_item.GetIsUse());
+                _buttonEat.SetActive(_item.GetIsFood()); 
+            }
+            else
+            {
+                return;
+            }
         }
 
     }
@@ -61,6 +75,7 @@ public class Cell : MonoBehaviour
             _imageCell.sprite = _standartSprite;
             _textQuantity.text = "";
             _buttonEat.SetActive(false);
+            _buttonUse.SetActive(false);
         }
     }
 
@@ -78,6 +93,13 @@ public class Cell : MonoBehaviour
 
     public GameObject GetObject()
     {
-        return _objectItem;
+        if(_objectItem == null)
+        {
+            return null;
+        }
+        else
+        {
+            return _objectItem;
+        }
     }
 }

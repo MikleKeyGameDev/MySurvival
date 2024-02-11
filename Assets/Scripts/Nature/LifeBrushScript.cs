@@ -4,15 +4,18 @@ using UnityEngine;
 public class LifeBrushScript : MonoBehaviour
 {
     [SerializeField] private Sprite[] _spritesStages;
-    [SerializeField] private SpriteRenderer _rend;
     [SerializeField] private GameObject _producedProduct;
     [SerializeField] private InventoryBox _inventory;
 
+    [SerializeField] private float[] _timeLife;
+
+    private SpriteRenderer _rend;
     private bool _isRipe;
 
     private void Start()
     {
         StartCoroutine(Maturation());
+        _rend = GetComponent<SpriteRenderer>();
     }
 
     public void Harvest()
@@ -28,7 +31,7 @@ public class LifeBrushScript : MonoBehaviour
         }
         else
         {
-            Debug.Log("Куст ещё не созрел");
+            return;
         }
     }
 
@@ -36,7 +39,7 @@ public class LifeBrushScript : MonoBehaviour
     {
         if (_isRipe == false)
         {
-            yield return new WaitForSeconds(Random.Range(50, 100));
+            yield return new WaitForSeconds(Random.Range(_timeLife[0], _timeLife[1]));
             _isRipe = true;
             _rend.sprite = _spritesStages[1];
         }

@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class InteractBrush : MonoBehaviour
@@ -5,15 +6,16 @@ public class InteractBrush : MonoBehaviour
     private LifeBrushScript _life;
 
     private bool _isPlayer;
-
-    private void Update()
-    {
-        InputPlayer();
-    }
+    private bool _isMousOver;
 
     private void Start()
     {
         _life = GetComponent<LifeBrushScript>();
+    }
+
+    private void Update()
+    {
+        InputPlayer();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -34,7 +36,7 @@ public class InteractBrush : MonoBehaviour
 
     private void InputPlayer()
     {
-        if(_isPlayer == true && Input.GetKeyDown(KeyCode.E))
+        if(_isPlayer == true && Input.GetKey(KeyCode.E) == true)
         {
             _life.Harvest();
         }

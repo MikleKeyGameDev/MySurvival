@@ -30,16 +30,24 @@ public class InteractoinItem : MonoBehaviour
         }
     }
 
+
     private void InputPlayer()
     {
         if (_isPlayer == true && Input.GetKeyDown(KeyCode.E))
         {
-            _inventory.AddItem(_producedProduct);
-            Destroy(gameObject);
+            if (_inventory.AddItem(_producedProduct))
+            {
+                Destroy(gameObject);
+            }
         }
         else
         {
             return;
         }
+    }
+
+    public void FindInventory()
+    {
+        _inventory = FindAnyObjectByType<InventoryBox>();
     }
 }

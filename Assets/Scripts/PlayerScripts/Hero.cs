@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.XR;
 
 public class Hero : MonoBehaviour
 {
@@ -7,6 +8,51 @@ public class Hero : MonoBehaviour
     [SerializeField] private float _speed;
     [SerializeField, Range(0, 100)] private float _health;
     [SerializeField, Range(0, 100)] private float _hunger;
+
+    [SerializeField] GameObject _axeStoun;
+
+    [SerializeField] private GameObject _hend;
+
+    private void Update()
+    {
+        if (_hend != null)
+        {
+            if (_hend.name == "StouneAxe")
+            {
+                _axeStoun.SetActive(true);
+            }
+            else if(_hend == null || _hend.name != "StouneAxe")
+            {
+                _axeStoun.SetActive(false);
+            }
+        }
+        else 
+        {
+            _axeStoun.SetActive(false); 
+        }
+    }
+
+    public bool GetAxe()
+    {
+        if (_hend != null)
+        {
+            if (_hend.name == "StouneAxe")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        return false;
+    }
+
+    public void SetHendObject(GameObject obj)
+    {
+        _hend = obj;
+    }
 
     private LifeHero _life;
 

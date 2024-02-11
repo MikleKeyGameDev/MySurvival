@@ -137,9 +137,11 @@ MonoBehaviour:
   _objItem: {fileID: 8016487517128502925}
   _name: Log
   _id: 2
-  _isQuantitative: 0
-  _isFood: 0
   _nutritionalValue: 0
+  _isQuantitative: 1
+  _isFood: 0
+  _isCrafting: 0
+  _isUse: 0
 --- !u!114 &-3027920144991402814
 MonoBehaviour:
   m_ObjectHideFlags: 0

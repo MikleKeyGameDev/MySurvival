@@ -1,4 +1,7 @@
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class AnimationSwitch : MonoBehaviour
 {
@@ -18,7 +21,13 @@ public class AnimationSwitch : MonoBehaviour
 
     private void SwitchWalk()
     {
-        if(_mover.MoveX != 0 || _mover.MoveY != 0)
+        if (Input.GetMouseButton(0))
+        {
+            _anim.Play("Attack");
+            _anim.SetBool("isAttack", true);
+            StartCoroutine(StopTimeAnim());
+        }
+        else if(_mover.MoveX != 0 || _mover.MoveY != 0)
         {
             _anim.SetBool("isRun", true);
         }
@@ -26,5 +35,11 @@ public class AnimationSwitch : MonoBehaviour
         {
             _anim.SetBool("isRun", false);
         }
+    }
+
+    private IEnumerator StopTimeAnim()
+    {
+        yield return new WaitForSeconds(0.45f);
+        _anim.SetBool("isAttack", false);
     }
 }
